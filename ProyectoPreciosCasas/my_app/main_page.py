@@ -23,7 +23,7 @@ from geopy.geocoders import Nominatim
 
 st.set_page_config(page_title='App ',
                     layout="wide", 
-                    page_icon=':house',  
+                    page_icon='🐔',  
                     initial_sidebar_state="expanded")
 
 
@@ -33,7 +33,7 @@ st.header('Propuesto por [Brayan Alexy Caballero Alvarez](https://www.linkedin.c
 
 
 def get_data():
-     url = 'https://raw.githubusercontent.com/sebmatecho/CienciaDeDatos/master/ProyectoPreciosCasas/data/kc_house_data.csv'
+     url = 'https://raw.githubusercontent.com/LORDINGBC/ciencia-datos/main/ProyectoPreciosCasas/data/kc_house_data.csv'
      return pd.read_csv(url)
 
 data = get_data()
