@@ -110,7 +110,7 @@ zipcod = st.multiselect(
       list(sorted(set(data['zipcode']))),
       list(sorted(set(data['zipcode']))))
 data = data[(data['price_tier'].isin(tier))&(data['zipcode'].isin(zipcod))]
-st.subheader('Filtros adicionales (Opcionales)')
+# st.subheader('Filtros adicionales (Opcionales)')
 
 
 # OptFiltro = st.multiselect(
