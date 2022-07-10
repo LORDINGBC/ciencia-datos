@@ -43,7 +43,7 @@ data['yr_built']= pd.to_datetime(data['yr_built'], format = '%Y').dt.year
 
 #llenar la columna anterior con new_house para fechas anteriores a 2015-01-01
 data['house_age'] = 'NA'
-data['name_ciudad'] = 'NA'
+# data['name_ciudad'] = 'NA'
 #llenar la columna anterior con new_house para fechas anteriores a 2015-01-01
 data.loc[data['yr_built']>1990,'house_age'] = 'new_house' 
 # geolocator = Nominatim(user_agent="brayan caballero")
@@ -76,7 +76,7 @@ data['price_tier'] = data['price'].apply(lambda x: 'Primer cuartil' if x <= 3219
                                                    'Cuarto cuartil')
 
 data['price/sqft'] = data['price']/data['sqft_living']
-st.write(data['zipcode'][1000], data['lat'][1000], data['long'][1000])
+# st.write(data['zipcode'][1000], data['lat'][1000], data['long'][1000])
 
 st.dataframe(data)
 st.write('Este dashboard tiene por objevito presentar rápida y fácilmente la información derivada del estudio de la dinámica inmobiliaria en King Count, WA (USA). Los datos están disponibles [aquí](https://www.kaggle.com/datasets/harlfoxem/housesalesprediction) ')
@@ -113,89 +113,89 @@ data = data[(data['price_tier'].isin(tier))&(data['zipcode'].isin(zipcod))]
 st.subheader('Filtros adicionales (Opcionales)')
 
 
-OptFiltro = st.multiselect(
-     'Variables a incluir en los filtros:',
-     ['Habitaciones', 'Baños', 'Área construida (pies cuadrados)','Pisos','Vista al agua','Evaluación de la propiedad','Condición'],
-     ['Habitaciones', 'Baños'])
+# OptFiltro = st.multiselect(
+#      'Variables a incluir en los filtros:',
+#      ['Habitaciones', 'Baños', 'Área construida (pies cuadrados)','Pisos','Vista al agua','Evaluación de la propiedad','Condición'],
+#      ['Habitaciones', 'Baños'])
 
 
-if 'Habitaciones' in OptFiltro: 
-     if data['bedrooms'].min() < data['bedrooms'].max():
-          min_habs, max_habs = st.sidebar.select_slider(
-          'Número de Habitaciones',
-          options=list(sorted(set(data['bedrooms']))),
-          value=(data['bedrooms'].min(),data['bedrooms'].max()))
-          data = data[(data['bedrooms']>= min_habs)&(data['bedrooms']<= max_habs)]
-     else:
-          st.markdown("""
-               El filtro **Habitaciones** no es aplicable para la selección actual de valores
-               """)
-if 'Baños' in OptFiltro: 
-     if data['bathrooms'].min() < data['bathrooms'].max():
-          min_banhos, max_banhos = st.sidebar.select_slider(
-          'Número de baños ',
-          options=list(sorted(set(data['bathrooms']))),
-          value=(data['bathrooms'].min(), data['bathrooms'].max()))
-          data = data[(data['bathrooms']>= min_banhos)&(data['bathrooms']<= max_banhos)]
-     else:
-          st.markdown("""
-               El filtro **Baños** no es aplicable para la selección actual de valores
-               """)
-if 'Área construida (pies cuadrados)' in OptFiltro: 
-     if data['sqft_living'].min() < data['sqft_living'].max():
-          area = st.sidebar.slider('Área construida menor a', int(data['sqft_living'].min()),int(data['sqft_living'].max()),2000)
-          data = data[data['sqft_living']<area]
-     else:  
-          st.markdown("""
-               El filtro **Área construida (pies cuadrados)** no es aplicable para la selección actual de valores
-               """)
+# if 'Habitaciones' in OptFiltro: 
+#      if data['bedrooms'].min() < data['bedrooms'].max():
+#           min_habs, max_habs = st.sidebar.select_slider(
+#           'Número de Habitaciones',
+#           options=list(sorted(set(data['bedrooms']))),
+#           value=(data['bedrooms'].min(),data['bedrooms'].max()))
+#           data = data[(data['bedrooms']>= min_habs)&(data['bedrooms']<= max_habs)]
+#      else:
+#           st.markdown("""
+#                El filtro **Habitaciones** no es aplicable para la selección actual de valores
+#                """)
+# if 'Baños' in OptFiltro: 
+#      if data['bathrooms'].min() < data['bathrooms'].max():
+#           min_banhos, max_banhos = st.sidebar.select_slider(
+#           'Número de baños ',
+#           options=list(sorted(set(data['bathrooms']))),
+#           value=(data['bathrooms'].min(), data['bathrooms'].max()))
+#           data = data[(data['bathrooms']>= min_banhos)&(data['bathrooms']<= max_banhos)]
+#      else:
+#           st.markdown("""
+#                El filtro **Baños** no es aplicable para la selección actual de valores
+#                """)
+# if 'Área construida (pies cuadrados)' in OptFiltro: 
+#      if data['sqft_living'].min() < data['sqft_living'].max():
+#           area = st.sidebar.slider('Área construida menor a', int(data['sqft_living'].min()),int(data['sqft_living'].max()),2000)
+#           data = data[data['sqft_living']<area]
+#      else:  
+#           st.markdown("""
+#                El filtro **Área construida (pies cuadrados)** no es aplicable para la selección actual de valores
+#                """)
 
-if 'Pisos' in OptFiltro: 
-     if data['floors'].min() < data['floors'].max():
-          min_pisos, max_pisos = st.sidebar.select_slider(
-          'Número de Pisos',
-          options=list(sorted(set(data['floors']))),
-          value=(data['floors'].min(),data['floors'].max()))
-          data = data[(data['floors']>= min_pisos)&(data['floors']<= max_pisos)]
-     else:
-          st.markdown("""
-               El filtro **Pisos** no es aplicable para la selección actual de valores
-               """)
+# if 'Pisos' in OptFiltro: 
+#      if data['floors'].min() < data['floors'].max():
+#           min_pisos, max_pisos = st.sidebar.select_slider(
+#           'Número de Pisos',
+#           options=list(sorted(set(data['floors']))),
+#           value=(data['floors'].min(),data['floors'].max()))
+#           data = data[(data['floors']>= min_pisos)&(data['floors']<= max_pisos)]
+#      else:
+#           st.markdown("""
+#                El filtro **Pisos** no es aplicable para la selección actual de valores
+#                """)
 
-if 'Vista al agua' in OptFiltro: 
-     if data['view'].min() < data['view'].max():
-          min_vista, max_vista = st.sidebar.select_slider(
-          'Puntaje de vista al agua',
-          options=list(sorted(set(data['view']))),
-          value=(data['view'].min(),data['view'].max()))
-          data = data[(data['view']>= min_vista)&(data['view']<= max_vista)]
-     else:
-          st.markdown("""
-               El filtro **Vista al agua** no es aplicable para la selección actual de valores
-               """)
-if 'Evaluación de la propiedad' in OptFiltro:
-     if data['grade'].min() < data['grade'].max():
-          min_cond, max_cond = st.sidebar.select_slider(
-          'Índice de evaluación de la propiedad',
-          options=list(sorted(set(data['grade']))),
-          value=(data['grade'].min(),data['grade'].max()))
-          data = data[(data['grade']>= min_cond)&(data['grade']<= max_cond)]
-     else:
-          st.markdown("""
-               El filtro **Evaluación de la propiedad** no es aplicable para la selección actual de valores
-               """)
+# if 'Vista al agua' in OptFiltro: 
+#      if data['view'].min() < data['view'].max():
+#           min_vista, max_vista = st.sidebar.select_slider(
+#           'Puntaje de vista al agua',
+#           options=list(sorted(set(data['view']))),
+#           value=(data['view'].min(),data['view'].max()))
+#           data = data[(data['view']>= min_vista)&(data['view']<= max_vista)]
+#      else:
+#           st.markdown("""
+#                El filtro **Vista al agua** no es aplicable para la selección actual de valores
+#                """)
+# if 'Evaluación de la propiedad' in OptFiltro:
+#      if data['grade'].min() < data['grade'].max():
+#           min_cond, max_cond = st.sidebar.select_slider(
+#           'Índice de evaluación de la propiedad',
+#           options=list(sorted(set(data['grade']))),
+#           value=(data['grade'].min(),data['grade'].max()))
+#           data = data[(data['grade']>= min_cond)&(data['grade']<= max_cond)]
+#      else:
+#           st.markdown("""
+#                El filtro **Evaluación de la propiedad** no es aplicable para la selección actual de valores
+#                """)
 
-if 'Condición' in OptFiltro:
-     if data['condition'].min() < data['condition'].max():
-          min_condi, max_condi = st.sidebar.select_slider(
-          'Condición de la propiedad',
-          options=list(sorted(set(data['condition']))),
-          value=(data['condition'].min(),data['condition'].max()))
-          data = data[(data['condition']>= min_condi)&(data['condition']<= max_condi)]
-     else:
-          st.markdown("""
-               El filtro **Condición** no es aplicable para la selección actual de valores
-               """)
+# if 'Condición' in OptFiltro:
+#      if data['condition'].min() < data['condition'].max():
+#           min_condi, max_condi = st.sidebar.select_slider(
+#           'Condición de la propiedad',
+#           options=list(sorted(set(data['condition']))),
+#           value=(data['condition'].min(),data['condition'].max()))
+#           data = data[(data['condition']>= min_condi)&(data['condition']<= max_condi)]
+#      else:
+#           st.markdown("""
+#                El filtro **Condición** no es aplicable para la selección actual de valores
+#                """)
 
 
 
@@ -211,10 +211,13 @@ if 'Condición' in OptFiltro:
 # Mapas 
 
 # info geojson
-url2 = 'https://raw.githubusercontent.com/sebmatecho/CienciaDeDatos/master/ProyectoPreciosCasas/data/KingCount.geojson'
+url2 = 'https://raw.githubusercontent.com/LORDINGBC/ciencia-datos/main/ProyectoPreciosCasas/data/KingCount.geojson'
 col1, col2 = st.columns(2)
 with col1:
      st.header("Densidad de casas disponibles por código postal")
+
+
+
      data_aux = data[['id','zipcode']].groupby('zipcode').count().reset_index()
      custom_scale = (data_aux['id'].quantile((0,0.2,0.4,0.6,0.8,1))).tolist()
 
@@ -232,7 +235,7 @@ with col1:
 
 geolocator = Nominatim(user_agent="brayan caballero")
 reverse = partial(geolocator.reverse, language="es")
-st.write(reverse("47.6593 , -122.327"))
+st.write(reverse(mapa.location))
 
 
 # i = 0
