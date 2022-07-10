@@ -246,17 +246,17 @@ st.write(reverse(mapa.location))
 
 
 
-i = 0
-while i <= 5:
-     i+=1
-     geolocator = Nominatim(user_agent="brayan caballero")
-     reverse = partial(geolocator.reverse, language="es")
-     # st.write(reverse(data['lat'][i], data['long'][i]))
-     # console.log(reverse(data['lat'][i], data['long'][i]))
-     #  data['lat'][i],  data['long'][i]
-     st.write(data['lat'][i], data['long'][i])
-else:
-     st.write("Se ha completado toda la iteración y c vale")
+# i = 0
+# while i <= 5:
+#      i+=1
+#      geolocator = Nominatim(user_agent="brayan caballero")
+#      reverse = partial(geolocator.reverse, language="es")
+#      # st.write(reverse(data['lat'][i], data['long'][i]))
+#      # console.log(reverse(data['lat'][i], data['long'][i]))
+#      #  data['lat'][i],  data['long'][i]
+#      st.write(data['lat'][i], data['long'][i])
+# else:
+#      st.write("Se ha completado toda la iteración y c vale")
 
 
 
