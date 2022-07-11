@@ -218,8 +218,7 @@ with col1:
      
      st.markdown("""
      Puede filtrar por un solo codigo postal y en la parte inferior del mapa le saldra informacion de este lugar. 
- 
-     """)
+      """)
 
 
      data_aux = data[['id','zipcode']].groupby('zipcode').count().reset_index()
@@ -242,26 +241,35 @@ reverse = partial(geolocator.reverse, language="es")
 st.write(reverse(mapa.location))
 
 
-# i = 0
-# for x,y in data['lat'][i], data['long'][i]:
-     
-#      st.write(x,y)
-     
 
 
+# graficos
+#  data = pd.read_csv('basededatos/data.csv')
 
-# i = 0
-# while i <= 5:
-#      i+=1
-#      geolocator = Nominatim(user_agent="brayan caballero")
-#      reverse = partial(geolocator.reverse, language="es")
-#      # st.write(reverse(data['lat'][i], data['long'][i]))
-#      # console.log(reverse(data['lat'][i], data['long'][i]))
-#      #  data['lat'][i],  data['long'][i]
-#      st.write(data['lat'][i], data['long'][i])
-# else:
-#      st.write("Se ha completado toda la iteración y c vale")
+st.title('Cual es el valor promedio de los inmuebles por año de construccion')
 
+habitaciones = st.multiselect(
+'cuantas habitaciones',
+list(set(data['bedrooms'])),
+[1,2,3]
+)
+
+banhos = st.multiselect(
+'cuantas bañoss',
+list(set(data['bathrooms'])),
+[1,2,3]
+)
+
+sns.set(style="darkgrid")
+sns.axes_style("whitegrid")
+
+aux = data[data['bedrooms'].isin(habitaciones) &(data['bathrooms'].isin(banhos))]
+
+df = aux[['sqft_living','yr_built']].groupby('yr_built').mean().reset_index()
+fig = sns.lineplot(x= 'yr_built', y='sqft_living', data = df)
+fig.set_xlabel('Año de Construcción')
+fig.set_ylabel('Precio (USD)')
+st.pyplot(fig.figure)
 
 
 
