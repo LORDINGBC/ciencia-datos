@@ -215,7 +215,11 @@ url2 = 'https://raw.githubusercontent.com/LORDINGBC/ciencia-datos/main/ProyectoP
 col1, col2 = st.columns(2)
 with col1:
      st.header("Densidad de casas disponibles por código postal")
-
+     
+     st.markdown("""
+     Puede filtrar por un solo codigo postal y en la parte inferior del mapa le saldra informacion de este lugar. 
+ 
+     """)
 
 
      data_aux = data[['id','zipcode']].groupby('zipcode').count().reset_index()
